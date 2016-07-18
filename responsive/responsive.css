@@ -4,7 +4,7 @@
 	and (min-device-width: 1201px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 0 0px;}
+	background:url(software.png) 0 0px;}
 }
 
 /* Retina Screens 1 */
@@ -12,7 +12,7 @@
 	and (min-device-width: 1201px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 0 0px;}
+	background:url(software.png) 0 0px;}
 }
 
 /* Non-Retina Screens 2 */
@@ -21,7 +21,7 @@
 	and (max-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 128 0px;}
+	background:url(software.png) 128 0px;}
 }
 
 /* Retina Screens 2 */
@@ -30,7 +30,7 @@
 	and (max-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 128 0px;}
+	background:url(software.png) 128 0px;}
 }
 
 /* Non-Retina Screens 3 */
@@ -39,7 +39,7 @@
 	and (max-device-width: 1100px)	
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 256 0px;}
+	background:url(software.png) 256 0px;}
 }
 
 /* Retina Screens 3 */
@@ -48,7 +48,7 @@
 	and (max-device-width: 1100px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 256 0px;}
+	background:url(software.png) 256 0px;}
 }
 
 /* Non-Retina Screens 4 */
@@ -57,7 +57,7 @@
 	and (max-device-width: 901px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 384 0px;}
+	background:url(software.png) 384 0px;}
 }
 
 /* Retina Screens 4 */
@@ -66,7 +66,7 @@
 	and (max-device-width: 901px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 384 0px;}
+	background:url(software.png) 384 0px;}
 }
 
 
@@ -76,7 +76,7 @@
 	and (max-device-width: 801px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 512 0px;}
+	background:url(software.png) 512 0px;}
 }
 
 /* Retina Screens 5 */
@@ -85,7 +85,7 @@
 	and (max-device-width: 801px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 512 0px;}
+	background:url(software.png) 512 0px;}
 }
 
 /* Non-Retina Screens 6*/
@@ -93,7 +93,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 0 -240px;}
+	background:url(software.png) 0 -240px;}
 }
 
 /* Retina Screens 6*/
@@ -101,7 +101,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 0 -240px;}
+	background:url(software.png) 0 -240px;}
 }
 
 /* Non-Retina Screens 7 */
@@ -109,7 +109,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 128 -240px;}
+	background:url(software.png) 128 -240px;}
 }
 
 /* Retina Screens 7 */
@@ -117,7 +117,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 128 -240px;}
+	background:url(software.png) 128 -240px;}
 }
 
 /* Non-Retina Screens 8*/
@@ -125,7 +125,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 256 -240px;}
+	background:url(software.png) 256 -240px;}
 }
 
 /* Retina Screens 8 */
@@ -133,7 +133,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 256 -240px;}
+	background:url(software.png) 256 -240px;}
 }
 
 
@@ -142,7 +142,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 384 -240px;}
+	background:url(software.png) 384 -240px;}
 }
 
 /* Retina Screens 9 */
@@ -150,7 +150,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 384 -240px;}
+	background:url(software.png) 384 -240px;}
 }
 
 
@@ -159,7 +159,7 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 1) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 512 -240px;}
+	background:url(software.png) 512 -240px;}
 }
 
 /* Retina Screens 10 */
@@ -167,5 +167,5 @@
 	and (min-device-width: 1200px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 	.software {width: 128; height: 240;
-	background:url(responsive/software.png) 512 -240px;}
+	background:url(software.png) 512 -240px;}
 }
