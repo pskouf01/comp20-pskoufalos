@@ -6,4 +6,4 @@ Added css code that manipulated width and height of a full picture with ten slot
 
 Collaborated with Stamatios Aleiferis.
 
-Approximately 3 hours of work.
+Approximately 4.5 hours of work.
