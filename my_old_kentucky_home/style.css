@@ -1,4 +1,20 @@
 
 body {
-text-align: center;	
+	text-align: center;	
+	background-color: lightblue;
+}
+
+h1 {
+	color: darkblue;
+	font-style: italic;
+	font-weight: bold;
+	font: sans-serif;
+}
+
+h2 {
+	color: white;
+	font-style: normal;
+	font-weight: inline;
+	text-align: center;
+	vertical-align: center;
 }
