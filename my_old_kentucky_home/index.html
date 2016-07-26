@@ -15,12 +15,8 @@
 
 <script>
 	var video = document.getElementById("video");
-	var caption = document.getElementById("captions");
-	var image = document.getElementById("Image");
-	var timer = document.getElementById("timer");
+	var lyrics = document.getElementById("lyrics");
 	video.addEventListener("timeupdate", function() {
-		console.log("Hello Nate!");
-		timer.innerHTML = video.currentTime;
 		
 		if (video.currentTime < 4) {
 			caption.innerHTML ="<h3>This will not work on FireFox...Sorry!</h3>";
