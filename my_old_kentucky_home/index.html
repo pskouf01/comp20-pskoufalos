@@ -15,47 +15,47 @@
 
 <script>
 	var video = document.getElementById("video");
-	var lyrics = document.getElementById("lyrics");
+	var lyric = document.getElementById("lyrics");
 	video.addEventListener("timeupdate", function() {
 		
-		if (video.currentTime < 4) {
-			lyrics.innerHTML ="<h3>This will not work on FireFox...Sorry!</h3>";
+		if (video.currentTime < 15) {
+			lyric.innerHTML ="<h3>This will not work on FireFox...Sorry!</h3>";
 		}
-		else if (video.currentTime > 4 && video.currentTime < 5.5) {
-			lyrics.innerHTML = "<h3>Double Rainbow!</h3>";
-		}
-		else if (video.currentTime > 5.5 && video.currentTime < 6.5) {
-			lyrics.innerHTML = "<h1>OH MY GOD!</h1>";
-		}
-		else if (video.currentTime > 6.5 && video.currentTime < 16.8) {
-			lyrics.innerHTML = "<h3>Double Rainbow!</h3>";
-		}
-		else if (video.currentTime > 16.8 && video.currentTime < 18) {
-			lyrics.innerHTML = "<h1>WHAT DOES THIS MEAN?!</h1>";
-		}
-		else if (video.currentTime > 18 && video.currentTime < 20) {
-			lyrics.innerHTML = "<h2>It's so BRIGHT, so VIVID!</h2>";
-		}
-		else if (video.currentTime > 20 && video.currentTime < 22.5) {
-			lyrics.innerHTML = "<h3>Double Rainbow!</h3>";
-		}
-		else if (video.currentTime > 22.5 && video.currentTime < 24.5) {
-			lyrics.innerHTML = "<h2>It's so intense...</h2>";
-		}
-		else if (video.currentTime > 24.5 && video.currentTime < 26) {
-			lyrics.innerHTML = "<h1>WHAT DOES THIS MEAN?!</h1>";
-		}
-		else if (video.currentTime > 26 && video.currentTime < 32.3) {
-			lyrics.innerHTML = "<h3>It's starting to look like a TRIPLE RAINBOW!</h3>";
-		}
-		else if (video.currentTime > 32.3 && video.currentTime < 52) {
-			lyrics.innerHTML = '<p><img src="spongebob.jpg" alt="Image" /></p>';
-		}
-		else if (video.currentTime > 52) {
-			lyrics.innerHTML = "<h3>Thanks For Watching!</h3>";
-		}
+		// else if (video.currentTime > 4 && video.currentTime < 5.5) {
+		// 	lyric.innerHTML = "<h3>Double Rainbow!</h3>";
+		// }
+		// else if (video.currentTime > 5.5 && video.currentTime < 6.5) {
+		// 	lyric.innerHTML = "<h1>OH MY GOD!</h1>";
+		// }
+		// else if (video.currentTime > 6.5 && video.currentTime < 16.8) {
+		// 	lyric.innerHTML = "<h3>Double Rainbow!</h3>";
+		// }
+		// else if (video.currentTime > 16.8 && video.currentTime < 18) {
+		// 	lyric.innerHTML = "<h1>WHAT DOES THIS MEAN?!</h1>";
+		// }
+		// else if (video.currentTime > 18 && video.currentTime < 20) {
+		// 	lyric.innerHTML = "<h2>It's so BRIGHT, so VIVID!</h2>";
+		// }
+		// else if (video.currentTime > 20 && video.currentTime < 22.5) {
+		// 	lyric.innerHTML = "<h3>Double Rainbow!</h3>";
+		// }
+		// else if (video.currentTime > 22.5 && video.currentTime < 24.5) {
+		// 	lyric.innerHTML = "<h2>It's so intense...</h2>";
+		// }
+		// else if (video.currentTime > 24.5 && video.currentTime < 26) {
+		// 	lyric.innerHTML = "<h1>WHAT DOES THIS MEAN?!</h1>";
+		// }
+		// else if (video.currentTime > 26 && video.currentTime < 32.3) {
+		// 	lyric.innerHTML = "<h3>It's starting to look like a TRIPLE RAINBOW!</h3>";
+		// }
+		// else if (video.currentTime > 32.3 && video.currentTime < 52) {
+		// 	lyric.innerHTML = '<p><img src="spongebob.jpg" alt="Image" /></p>';
+		// }
+		// else if (video.currentTime > 52) {
+		// 	lyric.innerHTML = "<h3>Thanks For Watching!</h3>";
+		// }
 		else {
-			lyrics.innerHTML ="";
+			lyric.innerHTML ="";
 		}
 		}, false);// Complete this section and create a CSS file named style.css
 </script>
