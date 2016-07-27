@@ -20,9 +20,12 @@
 
 	video.addEventListener("timeupdate", function() {
 		
-		if (video.currentTime < 8) {
+		if (video.currentTime < 6) {
 			lyric.innerHTML ="<h2>(melody)</h1>";
 		}
+		else if (video.currentTime > 6 && video.currentTime < 8) {
+			lyric.innerHTML = '<p><img src="ken_derby.jpg" alt="Image" /></p>';
+		}	
 		else if (video.currentTime > 8 && video.currentTime < 15) {
 			lyric.innerHTML = "<h2>The sun shines bright in My Old Kentucky Home,</h3>";
 		}
@@ -45,13 +48,16 @@
 			lyric.innerHTML = "<h2>By 'n' by hard times comes a knocking at the door,</h2>";
 		}
 		else if (video.currentTime > 55 && video.currentTime < 63) {
-			lyric.innerHTML = "<h2>Then My Old Kentucky Home, good night!</h1>";
+			lyric.innerHTML = "<h2>Then My Old Kentucky Home, good night!</h1>";	
 		}
+		else if (video.currentTime > 57 && video.currentTime < 59) {
+			lyric.innerHTML = '<p><img src="ken.jpg" alt="Image" /></p>';
+		}		
 		else if (video.currentTime > 63 && video.currentTime < 70) {
 			lyric.innerHTML = "<h2>Weep no more my lady </h2>";
 		}
 		else if (video.currentTime > 70 && video.currentTime < 77) {
-			lyric.innerHTML = "<h3>Oh weep no more today;</h3>";
+			lyric.innerHTML = "<h2>Oh weep no more today;</h3>";
 		}
 		else if (video.currentTime > 77 && video.currentTime < 80) {
 			lyric.innerHTML = "<h2>We will sing one song</h3>";
