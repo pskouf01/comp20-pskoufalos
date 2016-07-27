@@ -9,11 +9,14 @@
     function parse() {
       jsonData = '[{"id":1,"content":"Do you really want to hurt me?","username":"Boy"},{"id":2,"content":"Do you really want to make me cry?","username":"George"}]';
       // Your code here......
-      msg = JSON.parse(jsonData);
-      msg_out = "";
-      for(int i = 0; i < msg.lenght; i++){
-        msg_out += '<p>' + msg[i].content + " " + msg[i].username + '</p>' ;
+      var msg = JSON.parse(jsonData);
+      elem = document.getElementById("messages");
+      var msg_out = "";
+
+      for(i = 0; i < msg.length; i++){
+        msg_out = msg_out + "<p>" + msg[i].content + " " + msg[i].username + "</p>" ;
       }
+      elem.innerHTML = msg_out;
     }
   </script>
 </head>
