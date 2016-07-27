@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Messages</title>
+  <script>
+    function parse() {
+      jsonData = '[{"id":1,"content":"Do you really want to hurt me?","username":"Boy"},{"id":2,"content":"Do you really want to make me cry?","username":"George"}]';
+      // Your code here......
+      msg = JSON.parse(jsonData);
+      msg_out = "";
+      for(int i = 0; i < msg.lenght; i++){
+        msg_out += '<p>' + msg[i].content + " " + msg[i].username + '</p>' ;
+      }
+    }
+  </script>
+</head>
+
+<body onload="parse()">
+  <h1>Messages</h1>
+  <div id="messages"></div>
+</body>
+
+</html>
