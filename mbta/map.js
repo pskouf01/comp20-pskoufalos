@@ -103,39 +103,31 @@ function init()
 
 	navigator.geolocation.getCurrentPosition(function(position) {
 
-	console.log("Hit Me Three");
-
 	myLat = position.coords.latitude;
 	myLng = position.coords.longitude;
-	console.log(myLng);
-	console.log(myLat);
 
- 	 var myLatLng = {lat: myLat, lng: myLng};
+ 	var myLatLng = {lat: myLat, lng: myLng};
 
-
-	// var latlng =new google.maps.LatLng(my_loc_output[i].lat, my_loc_output[i].lng);	
 	console.log(myLatLng);
 
-	//		var marker = new google.maps.Marker({
-		// 	position: station,
-		// 	icon: 'pin.png',
-		// 	title: output[i].name
-		// });
 	var my_loc_marker = new google.maps.Marker({
 	    position: myLatLng,
 	    icon: "my_loc.png",
 	    map: map,
 		title: "my location"
 	});
+
+	});
+
+	}
+	// var latlng =new google.maps.LatLng(my_loc_output[i].lat, my_loc_output[i].lng);	
+	//		var marker = new google.maps.Marker({
+		// 	position: station,
+		// 	icon: 'pin.png',
+		// 	title: output[i].name
+		// });
+
 	
 	// elem = document.getElementById("info");
 	// elem.innerHTML = "<h1>You are in " + myLat + ", " + myLng + "</h1>";
 
-
-
-	});
-
-
-
-
-	}
