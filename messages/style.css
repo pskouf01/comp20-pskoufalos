@@ -18,6 +18,10 @@ p{
 	font-size: 150%;
 	font: italic bold;
 	text-decoration: underline;
+	width: 1000px;
+	height: 50px;
+	margin: auto;
+	border-width: 5px;
 	border-style: dashed;
     border-right: thick double #FF6347;	
     border-left: thick double #FF6347;
