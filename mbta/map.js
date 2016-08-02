@@ -66,7 +66,8 @@ function init()
 	{lat: output[8].lat, lng: output[8].lng},					
 	{lat: output[18].lat, lng: output[18].lng},					
 	{lat: output[15].lat, lng: output[15].lng},					
-	{lat: output[16].lat, lng: output[16].lng}
+	{lat: output[16].lat, lng: output[16].lng},
+	{lat: output[21].lat, lng: output[21].lng}
 	];
 
 	var red_line_path1 = new google.maps.Polyline({
@@ -94,4 +95,47 @@ function init()
     red_line_path1.setMap(map);
     red_line_path2.setMap(map);   
     red_line_path3.setMap(map);
+	
+//*******************************************************************//
+
+	myLat = 0;
+	myLng = 0;
+
+	navigator.geolocation.getCurrentPosition(function(position) {
+
+	console.log("Hit Me Three");
+
+	myLat = position.coords.latitude;
+	myLng = position.coords.longitude;
+	console.log(myLng);
+	console.log(myLat);
+
+ 	 var myLatLng = {lat: myLat, lng: myLng};
+
+
+	// var latlng =new google.maps.LatLng(my_loc_output[i].lat, my_loc_output[i].lng);	
+	console.log(myLatLng);
+
+	//		var marker = new google.maps.Marker({
+		// 	position: station,
+		// 	icon: 'pin.png',
+		// 	title: output[i].name
+		// });
+	var my_loc_marker = new google.maps.Marker({
+	    position: myLatLng,
+	    icon: "my_loc.png",
+	    map: map,
+		title: "my location"
+	});
+	
+	// elem = document.getElementById("info");
+	// elem.innerHTML = "<h1>You are in " + myLat + ", " + myLng + "</h1>";
+
+
+
+	});
+
+
+
+
 	}
