@@ -10,6 +10,7 @@ h1 {
 	font-size: 200 %;
 	font: fantasy;
 	text-align: center;
+	font-weight: bold;
 }
 
 p{
@@ -17,5 +18,8 @@ p{
 	font-size: 150%;
 	font: italic bold;
 	text-decoration: underline;
+	border-style: dashed;
+    border-right: thick double #FF6347;	
+    border-left: thick double #FF6347;
 }
 
