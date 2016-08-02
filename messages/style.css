@@ -1,1 +1,21 @@
 /* Your CSS here... */
+
+body {
+	background-color: #CD853F;
+}
+
+h1 {
+	background-color: #98FB98;
+	font-style: oblique;
+	font-size: 200 %;
+	font: fantasy;
+	text-align: center;
+}
+
+p{
+	text-align: center;
+	font-size: 150%;
+	font: italic bold;
+	text-decoration: underline;
+}
+
