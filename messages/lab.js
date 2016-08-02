@@ -27,18 +27,4 @@ var request = new XMLHttpRequest();
 	};
 
 	request.send(null);
-	// data = request.responseText;
-	
-	// console.log("Got data");
-	// console.log(data);
-
-
-	// var msg = JSON.parse(data);
-	// elem = document.getElementById("messages");
-	// var msg_out = "";
-
-	// for(i = 0; i < msg.length; i++){
-	// msg_out = msg_out + "<p>" + msg[i].content + " " + msg[i].username + "</p>" ;
-	// }
-	// elem.innerHTML = msg_out;
 }
