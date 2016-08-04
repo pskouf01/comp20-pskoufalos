@@ -98,6 +98,47 @@ function init()
 	
 //*******************************************************************//
 
+	var request = new XMLHttpRequest();
+	function parse() { //use parsing function for scheduling
+
+		request.open("GET", "https://powerful-depths-66091.herokuapp.com/redline.json", true); // read it in
+
+		request.onreadystatechange = function() {
+		if (request.readyState == 4 && request.status == 200) { //register that it opens
+			console.log("Got the data back!");
+			red = request.responseText;
+			console.log(red);
+			output_for_stations = JSON.parse(red);  // actually parse it
+
+			train_location = [] //for figuring out positioning
+
+			current_time = output_for_stations.CurrentTime; //holds current time
+			Line = output_for_stations.Line; // holds that its the red line
+			trips = output_for_stations.Trips; // holds trips
+			for (var i = 0; i < trips.length; i++) {
+			 train_location.push(trips[i].position);
+
+
+			};
+
+			// elem = document.getElementById("messages");
+		}
+		else if (request.readyState == 4 && request.status != 200) {
+			// think 404 or 500
+			// document.getElementById("messages").innerHTML = "<p>Whoops, something went terribly wrongo</p>";
+		}
+		else {
+			console.log("In progress...");
+		}
+	};
+
+	request.send(null);
+}
+
+
+ // My location 
+
+
 	myLat = 0;
 	myLng = 0;
 
@@ -114,12 +155,95 @@ function init()
 	    position: myLatLng,
 	    icon: "my_loc.png",
 	    map: map,
-		title: "my location"
+		title: "Closest station: " + output[min].name + "\n" +
+					   "Distance: " + min + " miles"
 	});
 
+	var location_info = [];
+	var location_of_infowindow = new google.maps.InfoWindow({
+		content: "my location"
 	});
+	
+	my_loc_marker.setMap(map);
+
+	location_info.push(location_of_infowindow);
+
+	google.maps.event.addListener(my_loc_marker, 'click', function() {
+	location_of_infowindow.setContent(this.title);
+	location_of_infowindow.open(map, this);
+
+	});	
+
+	var coordinates_to_closest_station = [
+		{lat: myLat, lng: myLng},
+		{lat: output[min].lat, lng: output[min].lng},
+	];
+
+	//set polyline from current location to closest MBTA Red Line station
+	var path_user_to_closest_station = new google.maps.Polyline({
+	path: coordinates_to_closest_station,
+	geodesic: true,
+	strokeColor: '#00FFFF',
+		strokeOpacity: 1.0,
+		strokeWeight: 2
+	});
+	path_user_to_closest_station.setMap(map);	
+	});
+
+	var stop_distances = [];
+	//find closest station
+	//calculate all stop_distances from current location to the 21 stations of the red line
+	for (s = 0; s < output.length; s++){ 
+		console.log(s)
+		var R = 6371; //radius of Earth in km
+		var f1 = myLat * (Math.PI / 180);
+	 	var f2 = output[s].lat * (Math.PI / 180);
+		var Df = (output[s].lat-myLat) * (Math.PI / 180);
+		var Dl = (output[s].lng-myLng) * (Math.PI / 180);
+		var a = Math.sin(Df/2) * Math.sin(Df/2) + Math.cos(f1) * Math.cos(f2) *	Math.sin(Dl/2) * Math.sin(Dl/2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		var d = R * c;	//distance from each station in km
+		stop_distances.push(d);
+		console.log(d)
+		
+	}
+
+	var min = 0;
+	var min_distance = stop_distances[0];
+	for (k = 1; k < stop_distances.length; k++){
+		if (stop_distances[k] > min_distance) {
+			min_distance = stop_distances[k];
+			min = k;
+			console.log("closest stop is" + output[min].name)
+			//console.log("min idx is" + min)
+		}
+	}
 
 	}
+
+		//  var stop_distances = [];
+
+	// for( i = 0; i < output.length; i++){
+	// Number.prototype.toRad = function(){
+	// 	return myLat * Math.PI / 180;
+	// }
+	// var my_Lat = myLat;
+	// var my_Lng = myLng;
+	// var lat = output[i].lat;
+	// var lng = output[i].lng;
+
+	// var R = 6371;
+	// var d1 = my_Lat - lat;
+	// var Lat_Rad = d1.toRad();
+	// var d2 = my_Lng - lng;
+	// var Lon_Rad = d2.toRad();
+	// var a = Math.sin(Lat_Rad/2) * Math.sin(Lat_Rad/2) + Math.cos(lat.toRad()) * Math.cos(my_Lat.toRad()) + Math.sin(Lon_Rad/2) * Math.sin(Lon_Rad/2);
+	// var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	// var d = R * c;
+	// d /= 1.60934 ;
+	// stop_distances.push(d);
+	// }
+
 	// var latlng =new google.maps.LatLng(my_loc_output[i].lat, my_loc_output[i].lng);	
 	//		var marker = new google.maps.Marker({
 		// 	position: station,
