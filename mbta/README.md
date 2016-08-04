@@ -1,11 +1,9 @@
 # mbta
 
-In this lab we combined our knowledge of Javascript, HTML and CSS to create and display a 
-detailed map of the MBTA red line trains. Each location had a specific pin for the stop's
-specific longitude and latitude and all the stops were connected with a red polyline.
-A css file is implemented to display the Google map, which is centered specifically
-at south station.
+In this lab we determined our own geolocation on the map using JavaScript objects.
+Once the location was found we were to create an information window with the closest
+Red Line station connected by a polyline and upon clicking it, the infowindow would tell you the upcoming trains. We used JSON and parsing to gather incoming data regarding the timing and location of each upcoming train and calculated the distance between two set Geopoints using the Haversine Formula. We used code given to us by stack overflow (http://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript) to calculate these distances.
 
 Collaborated with one Stamatios Aleiferis
 
-Took approximately 8.5 hours.
+Took approximately 11 hours.

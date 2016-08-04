@@ -33,7 +33,7 @@ function init()
 		info_for_window.push(infowindow);
 
 		google.maps.event.addListener(marker, 'click', function() {
-			infowindow.setContent(this.title);
+			infowindow.setContent(this.marker);
 			infowindow.open(map, this);
 		});		
 	};
@@ -99,11 +99,14 @@ function init()
 //*******************************************************************//
 
 	var request = new XMLHttpRequest();
-	function parse() { //use parsing function for scheduling
 
-		request.open("GET", "https://powerful-depths-66091.herokuapp.com/redline.json", true); // read it in
+	request.open("GET", "https://powerful-depths-66091.herokuapp.com/redline.json", true); // read it in
+	console.log("HERE1");
+	request.onreadystatechange = station_times;
+	request.send(null);
 
-		request.onreadystatechange = function() {
+	function station_times() {
+		console.log("HERE");
 		if (request.readyState == 4 && request.status == 200) { //register that it opens
 			console.log("Got the data back!");
 			red = request.responseText;
@@ -111,34 +114,38 @@ function init()
 			output_for_stations = JSON.parse(red);  // actually parse it
 
 			train_location = [] //for figuring out positioning
+			predictions = [];
 
 			current_time = output_for_stations.CurrentTime; //holds current time
 			Line = output_for_stations.Line; // holds that its the red line
 			trips = output_for_stations.Trips; // holds trips
-			for (var i = 0; i < trips.length; i++) {
-			 train_location.push(trips[i].position);
 
+			for (var i = 0; i < output_for_stations["TripList"]["Trips"].length; i++) { //searhc aray of trips
+				train_location.push(trips[i].position);
+				predictions.push(trips[i].predictions);
+				destination = trip[i].destination;
+				for(j = 0; j < predictions.length; j ++){ //now search through predictions
+					current_station = predictions[j].Stop;
+					station = infowindow_retriever(current_station);
+					infowindow_station = "Train to: " + destination + " arrives in: " + predictions[j].Seconds + " seconds";
+					infowindow[station].content.getElementById("content");
+				}
 
 			};
 
-			// elem = document.getElementById("messages");
-		}
-		else if (request.readyState == 4 && request.status != 200) {
-			// think 404 or 500
-			// document.getElementById("messages").innerHTML = "<p>Whoops, something went terribly wrongo</p>";
-		}
-		else {
-			console.log("In progress...");
-		}
-	};
-
-	request.send(null);
+		// elem = document.getElementById("messages");
+	}
+	// else if (request.readyState == 4 && request.status != 200) {
+	// 	// think 404 or 500
+	// 	// document.getElementById("messages").innerHTML = "<p>Whoops, something went terribly wrongo</p>";
+	// }
+	// else {
+	// 	console.log("In progress...");
+	// }
 }
 
 
- // My location 
-
-
+ // Finding My Location 
 	myLat = 0;
 	myLng = 0;
 
@@ -151,32 +158,34 @@ function init()
 
 	console.log(myLatLng);
 
+	// creating my marker
 	var my_loc_marker = new google.maps.Marker({
 	    position: myLatLng,
-	    icon: "my_loc.png",
+	    icon: "my_loc.png", 
 	    map: map,
 		title: "Closest station: " + output[min].name + "\n" +
 					   "Distance: " + min + " miles"
 	});
 
+	// creating infowindow for my location
 	var location_info = [];
 	var location_of_infowindow = new google.maps.InfoWindow({
 		content: "my location"
 	});
 	
-	my_loc_marker.setMap(map);
-
-	location_info.push(location_of_infowindow);
-
+	
+	my_loc_marker.setMap(map); // set my location
+	location_info.push(location_of_infowindow); // push infowindow
 	google.maps.event.addListener(my_loc_marker, 'click', function() {
-	location_of_infowindow.setContent(this.title);
-	location_of_infowindow.open(map, this);
+	location_of_infowindow.setContent(this.title); // set content
+	location_of_infowindow.open(map, this);// and allow it to show up
 
 	});	
 
+	// Finding closest station
 	var coordinates_to_closest_station = [
-		{lat: myLat, lng: myLng},
-		{lat: output[min].lat, lng: output[min].lng},
+		{lat: myLat, lng: myLng}, // my coordinates
+		{lat: output[min].lat, lng: output[min].lng}, // calculated closest station coordinates
 	];
 
 	//set polyline from current location to closest MBTA Red Line station
@@ -190,7 +199,8 @@ function init()
 	path_user_to_closest_station.setMap(map);	
 	});
 
-	var stop_distances = [];
+
+	var stop_distances = []; // array to compare distances
 	//find closest station
 	//calculate all stop_distances from current location to the 21 stations of the red line
 	for (s = 0; s < output.length; s++){ 
@@ -208,6 +218,7 @@ function init()
 		
 	}
 
+	// calculating minimum distance 
 	var min = 0;
 	var min_distance = stop_distances[0];
 	for (k = 1; k < stop_distances.length; k++){
@@ -220,6 +231,17 @@ function init()
 	}
 
 	}
+
+// retrieves index for specific infowindow
+	function infowindow_retriever(current_station)
+	{
+		for(i = 0; i < output.length ; i++){
+			if (current_station == output[i].name){
+				return i;
+			}
+		}
+	}
+
 
 		//  var stop_distances = [];
 
