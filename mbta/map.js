@@ -100,7 +100,7 @@ function init()
 
 	var request = new XMLHttpRequest();
 
-	request.open("GET", "https://powerful-depths-66091.herokuapp.com/redline.json", true); // read it in
+	request.open("GET", "https://sheltered-forest-5520.herokuapp.com/redline.json", true); // read in data
 	console.log("HERE1");
 	request.onreadystatechange = station_times;
 	request.send(null);
@@ -109,39 +109,30 @@ function init()
 		console.log("HERE");
 		if (request.readyState == 4 && request.status == 200) { //register that it opens
 			console.log("Got the data back!");
-			red = request.responseText;
+			red = request.responseText; 
 			console.log(red);
-			output_for_stations = JSON.parse(red);  // actually parse it
+			output_for_stations = JSON.parse(red);  // actually parse it and store in a variable
 
 			train_location = [] //for figuring out positioning
-			predictions = [];
+			trip_list = output_for_stations.TripList;
 
-			current_time = output_for_stations.CurrentTime; //holds current time
-			Line = output_for_stations.Line; // holds that its the red line
-			trips = output_for_stations.Trips; // holds trips
+			current_time = trip_list.CurrentTime; //holds current time
+			Line = trip_list.Line; // holds that its the red line
+			trips = trip_list.Trips; // holds trips
 
-			for (var i = 0; i < output_for_stations["TripList"]["Trips"].length; i++) { //searhc aray of trips
-				train_location.push(trips[i].position);
-				predictions.push(trips[i].predictions);
-				destination = trip[i].destination;
-				for(j = 0; j < predictions.length; j ++){ //now search through predictions
-					current_station = predictions[j].Stop;
-					station = infowindow_retriever(current_station);
-					infowindow_station = "Train to: " + destination + " arrives in: " + predictions[j].Seconds + " seconds";
-					infowindow[station].content.getElementById("content");
+			for (var i = 0; i < trips.length; i++) { //search aray of trips
+				destination_of_train = trip_list.trips[i].Destination;
+				for(j = 0; j < trips[i].Predictions.length; j ++){ //now search through predictions
+					current_station = trips[j].Predictions.Stop; // find your current stop
+					station = infowindow_retriever(current_station); // get the index
+					infowindow_station = "Train to: " + destination + " arrives in: " +trips[j].Predictions.Seconds + " seconds";
+					infowindow[station].setContent(infowindow_station);
 				}
 
 			};
 
 		// elem = document.getElementById("messages");
 	}
-	// else if (request.readyState == 4 && request.status != 200) {
-	// 	// think 404 or 500
-	// 	// document.getElementById("messages").innerHTML = "<p>Whoops, something went terribly wrongo</p>";
-	// }
-	// else {
-	// 	console.log("In progress...");
-	// }
 }
 
 
@@ -173,7 +164,7 @@ function init()
 		content: "my location"
 	});
 	
-	
+
 	my_loc_marker.setMap(map); // set my location
 	location_info.push(location_of_infowindow); // push infowindow
 	google.maps.event.addListener(my_loc_marker, 'click', function() {
@@ -241,39 +232,3 @@ function init()
 			}
 		}
 	}
-
-
-		//  var stop_distances = [];
-
-	// for( i = 0; i < output.length; i++){
-	// Number.prototype.toRad = function(){
-	// 	return myLat * Math.PI / 180;
-	// }
-	// var my_Lat = myLat;
-	// var my_Lng = myLng;
-	// var lat = output[i].lat;
-	// var lng = output[i].lng;
-
-	// var R = 6371;
-	// var d1 = my_Lat - lat;
-	// var Lat_Rad = d1.toRad();
-	// var d2 = my_Lng - lng;
-	// var Lon_Rad = d2.toRad();
-	// var a = Math.sin(Lat_Rad/2) * Math.sin(Lat_Rad/2) + Math.cos(lat.toRad()) * Math.cos(my_Lat.toRad()) + Math.sin(Lon_Rad/2) * Math.sin(Lon_Rad/2);
-	// var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	// var d = R * c;
-	// d /= 1.60934 ;
-	// stop_distances.push(d);
-	// }
-
-	// var latlng =new google.maps.LatLng(my_loc_output[i].lat, my_loc_output[i].lng);	
-	//		var marker = new google.maps.Marker({
-		// 	position: station,
-		// 	icon: 'pin.png',
-		// 	title: output[i].name
-		// });
-
-	
-	// elem = document.getElementById("info");
-	// elem.innerHTML = "<h1>You are in " + myLat + ", " + myLng + "</h1>";
-
