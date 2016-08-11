@@ -2,7 +2,8 @@
 // By: Panos Skoufalos
 // Date: Sunday, July 24, 2016
 
-function init() {	var stations = '[{"name": "South Station", "lng": -71.0552400000001, "lat": 42.352271},{"name": "Andrew", "lng": -71.057655, "lat": 42.330154},{"name": "Porter Square", "lng": -71.11914899999999, "lat": 42.3884  },{"name": "Harvard Square", "lng": -71.118956, "lat": 42.373362 },{"name": "JFK/UMass", "lng": -71.052391, "lat": 42.320685},{"name": "Savin Hill", "lng": -71.053331, "lat": 42.31129},{"name": "Park Street", "lng": -71.0624242, "lat": 42.35639457},{"name": "Broadway", "lng": -71.056967, "lat": 42.342622 },{"name": "North Quincy", "lng": -71.029583, "lat": 42.275275 },{"name": "Shawmut", "lng": -71.06573796000001, "lat": 42.29312583 },{"name": "Davis", "lng":-71.121815, "lat": 42.39674},{"name": "Alewife", "lng": -71.142483, "lat": 42.395428 },{"name": "Kendall/MIT", "lng": -71.08617653, "lat": 42.36249079},{"name": "Charles/MGH", "lng": -71.070628, "lat": 42.361166},{"name": "Downtown Crossing", "lng": -71.060225, "lat": 42.355518 },{"name": "Quincy Center", "lng": -71.005409, "lat": 42.251809 },{"name": "Quincy Adams", "lng": -71.007153, "lat": 42.233391 },{"name": "Ashmont", "lng": -71.06448899999999, "lat": 42.284652},{"name": "Wollaston", "lng": -71.0203369, "lat": 42.2665139 },{"name": "Fields Corner", "lng": -71.061667, "lat": 42.300093 },{"name": "Central Square", "lng": -71.103802, "lat": 42.365486 },{"name":"Braintree", "lng":-71.0011385, "lat": 42.2078543 }]';
+function init() {
+	var stations = '[{"name": "South Station", "lng": -71.0552400000001, "lat": 42.352271},{"name": "Andrew", "lng": -71.057655, "lat": 42.330154},{"name": "Porter Square", "lng": -71.11914899999999, "lat": 42.3884  },{"name": "Harvard Square", "lng": -71.118956, "lat": 42.373362 },{"name": "JFK/UMass", "lng": -71.052391, "lat": 42.320685},{"name": "Savin Hill", "lng": -71.053331, "lat": 42.31129},{"name": "Park Street", "lng": -71.0624242, "lat": 42.35639457},{"name": "Broadway", "lng": -71.056967, "lat": 42.342622 },{"name": "North Quincy", "lng": -71.029583, "lat": 42.275275 },{"name": "Shawmut", "lng": -71.06573796000001, "lat": 42.29312583 },{"name": "Davis", "lng":-71.121815, "lat": 42.39674},{"name": "Alewife", "lng": -71.142483, "lat": 42.395428 },{"name": "Kendall/MIT", "lng": -71.08617653, "lat": 42.36249079},{"name": "Charles/MGH", "lng": -71.070628, "lat": 42.361166},{"name": "Downtown Crossing", "lng": -71.060225, "lat": 42.355518 },{"name": "Quincy Center", "lng": -71.005409, "lat": 42.251809 },{"name": "Quincy Adams", "lng": -71.007153, "lat": 42.233391 },{"name": "Ashmont", "lng": -71.06448899999999, "lat": 42.284652},{"name": "Wollaston", "lng": -71.0203369, "lat": 42.2665139 },{"name": "Fields Corner", "lng": -71.061667, "lat": 42.300093 },{"name": "Central Square", "lng": -71.103802, "lat": 42.365486 },{"name":"Braintree", "lng":-71.0011385, "lat": 42.2078543 }]';
 	
 	// JSON parse station information	
 	var output = JSON.parse(stations);
@@ -29,7 +30,7 @@ function init() {	var stations = '[{"name": "South Station", "lng": -71.05524000
 			position: stations[i],
 			icon: 'pin.png',
 			title: output[i].name
-		});
+		});	
 
 		marker.setMap(map); // set marker
 		marker_for_station.push(marker); // store marker
@@ -39,8 +40,18 @@ function init() {	var stations = '[{"name": "South Station", "lng": -71.05524000
 		});
 
 		info_for_window.push(infowindow); // store infowindow
+		
+		console.log("GOT HERE 2");
 
 		google.maps.event.addListener(marker, 'click', function() {
+			var request = new XMLHttpRequest();
+
+			request.open("GET", "https://safe-cove-60897.herokuapp.com/redline.json", true); // read in data
+
+			console.log("GOT HERE");
+			
+			request.onreadystatechange = station_times(request, marker, infowindow);
+			request.send(null);
 			//infowindow.setContent(this.marker);
 			infowindow.open(map, this);
 		});		
@@ -110,46 +121,6 @@ function init() {	var stations = '[{"name": "South Station", "lng": -71.05524000
     red_line_path3.setMap(map);
 	
 //*******************************************************************//
-
-	var request = new XMLHttpRequest();
-
-	request.open("GET", "https://sheltered-forest-5520.herokuapp.com/redline.json", true); // read in data
-	request.onreadystatechange = station_times;
-	request.send(null);
-
-	function station_times() {
-		if (request.readyState == 4 && request.status == 200) { //register that it opens
-			red = request.responseText;  // get info
-			output_for_stations = JSON.parse(red);  // actually parse it and store in a variable
-			
-			trip_list = output_for_stations.TripList; // holds trip list
-			current_time = trip_list.CurrentTime; //holds current time
-			// Line = trip_list.Line; // holds that its the red line
-			trips = trip_list.Trips; // holds Trips
-
-			for (var i = 0; i < trips.length; i++) { //search aray of Trips 
-				destination_of_train = trip_list.Trips[i].Destination;
-				for(j = 0; j < trips[i].Predictions.length; j ++){ //now search through predictions
-					current_station = trip_list.Trips[i].Predictions[j].Stop; // find your current stop
-					station = infowindow_retriever(output, current_station); // get the index of the station
-					content_for_station = info_for_window[station].content;
-
-					infowindow_station = content_for_station + " Train to: " + destination_of_train + " arrives in: " + trip_list.Trips[i].Predictions[j].Seconds + " seconds";
-
-					//info_for_window[station].setContent(infowindow_station);
-
-					console.log("INFOWINDOW FOR : "+ infowindow_station)
-
-					google.maps.event.addListener(marker_for_station[station], 'click', function() {
-						info_for_window[station].setContent(infowindow_station);
-						infowindow.open(map, this);
-					});
-					
-				}
-
-			};
-		}
-	}
 
 
  // Finding My Location 
@@ -238,15 +209,56 @@ function init() {	var stations = '[{"name": "South Station", "lng": -71.05524000
 	}
 }	
 
+function station_times(request, marker, infowindow) {
+	if (request.readyState == 4 && request.status == 200) { //register that it opens
+		red = request.responseText;  // get info
+		output_for_stations = JSON.parse(red);  // actually parse it and store in a variable
+		console.log("GOT HERE 2");
+		trip_list = output_for_stations.TripList; // holds trip list
+		current_time = trip_list.CurrentTime; //holds current time
+		// Line = trip_list.Line; // holds that its the red line
+		trips = trip_list.Trips; // holds Trips
+
+		for (var i = 0; i < trips.length; i++) { //search aray of Trips 
+			destination_of_train = trip_list.Trips[i].Destination;
+			for(j = 0; j < trips[i].Predictions.length; j ++){ //now search through predictions
+				current_station = trip_list.Trips[i].Predictions[j].Stop; // find your current stop
+				station = infowindow_retriever(output, current_station); // get the index of the station
+				content_for_station = info_for_window[station].content;
 
 
+				// content that is displayed once clicked on
+
+				//info_for_window[station].setContent(infowindow_station);
+				console.log("INFOWINDOW FOR : "+ infowindow_station);
+
+
+				if(current_station == marker.title){
+					infowindow_station = content_for_station + " Train to: " + destination_of_train + " arrives in: " + trip_list.Trips[i].Predictions[j].Seconds + " seconds";
+					infowindow.setContent(infowindow_station);
+
+				}
+				// console.log("Marker FOR : "+ marker_for_station[station]);
+ 			// 	//setting the content to a specific 
+				// google.maps.event.addListener(marker_for_station[station], 'click', function() {
+				// 	info_for_window[station].setContent(infowindow_station);
+				// 	infowindow.open(map, this);
+				};
+			}
+
+		};
+	}
 
 // retrieves index for specific infowindow
-	function infowindow_retriever(output, current_station)
-	{
-		for(i = 0; i < output.length ; i++){
-			if (current_station == output[i].name){
-				return i;
-			}
+function infowindow_retriever(output, current_station)
+{
+	for(i = 0; i < output.length ; i++){
+		if (current_station == output[i].name){
+			return i;
 		}
 	}
+}
+
+
+
+
