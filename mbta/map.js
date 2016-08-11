@@ -45,13 +45,13 @@ function init() {
 
 		google.maps.event.addListener(marker, 'click', function() {
 			var request = new XMLHttpRequest();
-
-			request.open("GET", "https://safe-cove-60897.herokuapp.com/redline.json", true); // read in data
-
-			console.log("GOT HERE");
+			var url = "https://safe-cove-60897.herokuapp.com/redline.json";
+			if(request){
+				request.open("GET", url , true); // read in data
 			
-			request.onreadystatechange = station_times(request, marker, infowindow);
-			request.send(null);
+				request.onreadystatechange = station_times(request, marker, infowindow);
+				request.send(null);
+			}
 			//infowindow.setContent(this.marker);
 			infowindow.open(map, this);
 		});		
