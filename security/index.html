@@ -22,18 +22,32 @@
 				<ul>
 					<li> Security Risk: <em>High</em> </li>
 					<li> This <em>Cross-Site Scripting</em> vulnerability is a major security risk and puts Not Foursquare's client's information at a level of insecurity that should not exist with a public web application. </li>
-					<li> An initial issue with Not Foursquare (NF), as mentioned above, is that, as a web application, NF places too much trust in its users input. For Example when a user creates an account with NF a basic entry might look something like this, 
+					<li> An initial issue with Not Foursquare (NF), as mentioned above, is that, as a web application, NF places too much trust in its users input. For example when a user creates an account with NF a basic entry might look something like this, 
 					<code>curl --data "login=panos&lat=0&lng=0" http://localhost:5000/sendLocation 
 					</code></li>
-					<li> Now you might be asking, <em>so what's the big deal?</em> Well the problem really stems in the fact that NF does not properly regulate the inputs from its clients so an attacker can implement malicious JavaScript code and grant access to sensitive information. For example an attacker could write something like the following: <img src="alert_attacked.png"> and is able to alter the appearance of NF where a tedious popup appears. Even worse an attacker could run something along the lines of: <img src="document.cookies.png"> and obtain all cookies from the clients who use NF.</li>
+					<li> Now you might be asking, <em>so what's the big deal?</em> Well the problem really stems in the fact that NF does not properly regulate the inputs from its clients. So where in the first case a simple profile named "panos" would be created an attacker can implement malicious JavaScript code and grant access to sensitive information. For example an attacker could write something like the following: <img src="alert_attacked.png"> and is able to alter the appearance of NF where a tedious popup appears. Even worse an attacker could run something along the lines of: <img src="document.cookies.png"> and obtain all cookies from the clients who use NF.</li>
 					<li> Luckily this vulnerability is easily fixed. All NF would have to do is include a filter that removes characters that are often associated with malicious commands. This will allow the server to seep out malicious characters from entering the database and causing any harm. The following code was extracted from a simple <a href="http://www.dwheeler.com/secure-programs/Secure-Programs-HOWTO/cross-site-malicious-content.html">XSS prevention</a> website, and is one, of many, ways to filter out possibly malicious characters.<code> sub remove_special_chars {
 					  local($s) = @_;
 					  $s =~ s/[\<\>\"\'\%\;\(\)\&\+]//g;
 					  return $s;
 					 }</code> and is run as simply as <code>$data = &remove_special_chars($data);</code></li>
 				</ul>
-				<p><strong>SECOND VULNERABILITY</strong></p>
 			</li>
+			<li>
+				<p><strong>HTML Injection Vulnerabilities</strong></p>
+				<ul>
+					<li> Security Risk: <em> Medium </em></li>
+					<li> This <em>HTML</em> vulnerability is a rather serious security risk. Attackers have the capability to manually insert HTML code that can significantly change the appearance of NF. Although this vulnerability runs less of a risk towards the database of NF it is still an issue this web application should thrive to fix if it wishes to be a proper and secure website.</li>
+					<li> For example an attacker could very easily run a command off of their terminal that reads:</li>
+					<li><img src="html_example.png"></li>
+					<li>By running code such as this attackers can alter the experience of unsuspecting users who are attempting to use NF and result to something like this.</li>
+					<li><img src="this_is_an_attack.png"></li>
+					<li>Luckily, similarly to the above vulnerability, this issue is easily fixeable and once again requires the proper sanitization and cleansing of possibly malicious characters. NF can do this with ease using a simple mongo command that allows you to extract these exact characters. Simply adding <code>db.collection.update()</code> should do the trick.</li>
+				</ul>
+			</li>
+			<li>
+				<p><strong>THIRD VULNERABILITY</strong></p>
+			</li>		
 		</ol>
 		<h2>Conclusion</h2>
 		<p> As shown above the significance of these security vulnerabilities are rather easily fixable and can prevent major security breaches to NF's database. These solutions mostly tailor to more careful and sanitized external inputs from clients and making sure that no malicious code is introduced to your database but searching for specific characters and inputs. Most of these issues can be fixed at a very small cost (roughly 500 dollars) and rather easily applied. and will create a much safer and more acceptable public web application. </p>	
