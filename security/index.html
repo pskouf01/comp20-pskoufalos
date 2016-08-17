@@ -42,15 +42,15 @@
 					<li><img src="html_example.png"></li>
 					<li>By running code such as this attackers can alter the experience of unsuspecting users who are attempting to use NF and result to something like this.</li>
 					<li><img src="this_is_an_attack.png"></li>
-					<li>Luckily, similarly to the above vulnerability, this issue is easily fixeable and once again requires the proper sanitization and cleansing of possibly malicious characters. NF can do this with ease using a simple mongo command that allows you to extract these exact characters. Simply adding <code>db.collection.update()</code> should do the trick.</li>
+					<li>Luckily, similarly to the above vulnerability, this issue is easily fixeable and once again requires the proper sanitization and cleansing of possibly malicious characters. NF can do this with ease using a simple mongo command that allows you to extract these exact characters. Simply adding <code>db.collection.update()</code> should do the trick. Once again we see how placing too much trust in your users input can create a number of problems.</li>
 				</ul>
 			</li>
-			<li>
+<!-- 			<li>
 				<p><strong>THIRD VULNERABILITY</strong></p>
-			</li>		
+			</li> -->		
 		</ol>
 		<h2>Conclusion</h2>
-		<p> As shown above the significance of these security vulnerabilities are rather easily fixable and can prevent major security breaches to NF's database. These solutions mostly tailor to more careful and sanitized external inputs from clients and making sure that no malicious code is introduced to your database but searching for specific characters and inputs. Most of these issues can be fixed at a very small cost (roughly 500 dollars) and rather easily applied. and will create a much safer and more acceptable public web application. </p>	
+		<p> As shown above the significance of these security vulnerabilities are rather easily fixable and can prevent major security breaches to NF's database. These solutions mostly tailor to more careful and sanitized external inputs from clients and making sure that no malicious code is introduced to your database but searching for specific characters and inputs. Most of these issues can be fixed at a very small cost (roughly 500 dollars) and rather easily applied and will create a much safer and more acceptable public web application. If you agree with the following assessment, feel free to <a href="mailto:panagiotis.skoufalos@tufts.edu">contact me</a> and we can get to work :) </p>	
 	</body>
 </hmtl>
 
